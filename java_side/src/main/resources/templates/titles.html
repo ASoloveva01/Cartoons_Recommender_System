@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<script src="https://code.jquery.com/jquery-3.6.1.js" >
+</script>
+<script type="text/javascript">
+function save(myId){
+	$.post("http://localhost:8080/save/favorites/" + myId);
+}
+</script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<header style="text-align: center;">
+    <a th:href="@{/titles}">Главная</a>
+    <a th:href="@{/favorites}">Любимое</a>
+    <a th:href="@{/recommendations}">Рекомандованное</a>
+  </header>
+<div th:switch="${titlesList}">
+	<table> 
+		<tbody>
+			<td th:each="title : ${titlesList}" width="155" height="275" style="display: inline-block;">
+				<img th:src="@{${title.picture}}" th:alt="${title.name}" 
+                         		border="0" width="95" height="175" style="vertical-align:middle;">
+				<div  width="20" height="20" style="word-wrap: break-word;">
+					<a th:href="@{/titles/{id}(id=${title.id})}">
+						<figcaption  th:text="${title.name.substring(0, 
+                         				T(java.lang.Math).min(15, title.name.length()))}" >
+						</figcaption>
+					</a>
+				</div>
+				<button th:if="${mode == 'main'}" th:attr="onclick=|save('${title.id}')|">&#9825;</button> 
+			</td> 
+		</tbody>
+	</table>
+</div>
+</body>
+</html>

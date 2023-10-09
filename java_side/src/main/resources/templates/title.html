@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+
+  <body>
+
+
+    <div th:object="${title}">
+       <img th:src="@{*{picture}}" border="0" width="120" height="220">
+       <p><b>Название:</b> <span th:text="*{name}"></span></p>
+       <p><b>Жанры:</b> <span th:text="*{genres}?:'(Жанры не указаны.)'"></span></p>
+       <p><b>Описание:</b> <span th:text="*{description}?:'(Описание отсутсвует.)'"></span></p>
+       <p><b>Рейтинг:</b> <span th:text="*{rating}"></span></p>
+   
+    </div>
+    
+  </body>
+  
+</html>
